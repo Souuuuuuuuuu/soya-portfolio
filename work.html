@@ -8,7 +8,7 @@
   <style>
     @font-face{
       font-family: "BuenardLocal";
-      src: url("./assets/Buenard-VariableFont_wght.ttf") format("truetype");
+      src: url("/assets/Buenard-VariableFont_wght.ttf") format("truetype");
       font-display: swap;
     }
 
@@ -83,7 +83,7 @@
     .page-hero::before{
       content:"";
       position:absolute; inset:0;
-      background: url("./assets/work-hero.png") center/cover no-repeat;
+      background: url("/assets/work-hero.png") center/cover no-repeat;
       opacity: .95;
     }
     .page-hero h1{
@@ -379,27 +379,27 @@
       <div class="carousel" id="carousel" aria-label="Work carousel">
         <div class="track" id="track">
           <div class="card" data-index="0">
-            <div class="thumb"><img src="./assets/work1.png" alt="work 1"></div>
+            <div class="thumb"><img src="/assets/work1.png" alt="work 1"></div>
           
           </div>
 
           <div class="card" data-index="1">
-            <div class="thumb"><img src="./assets/work2.png" alt="work 2"></div>
+            <div class="thumb"><img src="/assets/work2.png" alt="work 2"></div>
          
           </div>
 
           <div class="card" data-index="2">
-            <div class="thumb"><img src="./assets/work3.png" alt="work 3"></div>
+            <div class="thumb"><img src="/assets/work3.png" alt="work 3"></div>
             
           </div>
 
           <div class="card" data-index="3">
-            <div class="thumb"><img src="./assets/work4.png" alt="work 4"></div>
+            <div class="thumb"><img src="/assets/work4.png" alt="work 4"></div>
     
           </div>
 
           <div class="card" data-index="4">
-            <div class="thumb"><img src="./assets/work5.png" alt="work 5"></div>
+            <div class="thumb"><img src="/assets/work5.png" alt="work 5"></div>
          
           </div>
         </div>
@@ -417,7 +417,7 @@
 <footer>
   <div class="container footer-grid">
     <div class="footer-logo">
-      <img src="./assets/logo.png" alt="">
+      <img src="/assets/logo.png" alt="">
     </div>
     <div class="footer-nav">
       <a href="./index.html#home">HOME</a>
@@ -427,8 +427,8 @@
       <a href="./contact.html">CONTACT</a>
     </div>
     <div class="footer-social">
-      <a class="social-link" href="#" aria-label="Instagram"><img src="./assets/instagram.svg" alt=""></a>
-      <a class="social-link" href="#" aria-label="X"><img src="./assets/x.svg" alt=""></a>
+      <a class="social-link" href="#" aria-label="Instagram"><img src="/assets/instagram.svg" alt=""></a>
+      <a class="social-link" href="#" aria-label="X"><img src="/assets/x.svg" alt=""></a>
     </div>
   </div>
 </footer>
@@ -455,11 +455,11 @@
 
 <script>
   const works = [
-    { title: "90's Revival", img: "./assets/work1.png", date: "2025/11/22", desc: "90年代の服って魅力的だよね" },
-    { title: "ADDICTION",    img: "./assets/work2.png", date: "2025/07/21", desc: "You don't trust me." },
-    { title: "Drama",     img: "./assets/work3.png", date: "2025/010/21",          desc: "夢見心地" },
-    { title: "NOTICE",    img: "./assets/work4.png", date: "2025/04/21",          desc: "気づかなくていいよ" },
-    { title: "9090",    img: "./assets/work5.png", date: "2025/05/21",          desc: "23A/W" },
+    { title: "90's Revival", img: "/assets/work1.png", date: "2025/11/22", desc: "90年代の服って魅力的だよね" },
+    { title: "ADDICTION",    img: "/assets/work2.png", date: "2025/07/21", desc: "You don't trust me." },
+    { title: "Drama",     img: "/assets/work3.png", date: "2025/010/21",          desc: "夢見心地" },
+    { title: "NOTICE",    img: "/assets/work4.png", date: "2025/04/21",          desc: "気づかなくていいよ" },
+    { title: "9090",    img: "/assets/work5.png", date: "2025/05/21",          desc: "23A/W" },
   ];
 
   const carousel = document.getElementById("carousel");

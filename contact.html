@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact | Soya Yasuda Portfolio</title>
+
+  <style>
+    @font-face{
+      font-family: "BuenardLocal";
+      src: url("./assets/Buenard-VariableFont_wght.ttf") format("truetype");
+      font-display: swap;
+    }
+
+    :root{
+      --navy: #001F2D;
+      --cream:#FFFCED;
+      --cream-dim: rgba(255,252,237,.82);
+      --line: #FFFCED;
+      --line-w: 0.5px;
+      --max: 1100px;
+      --nav-h: 64px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      background: var(--navy);
+      color: var(--cream);
+      letter-spacing: .02em;
+      font-family: system-ui, -apple-system, "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+    }
+    a{ color:inherit; text-decoration:none; }
+    img{ display:block; max-width:100%; }
+
+    .container{
+      width: min(var(--max), calc(100% - 80px));
+      margin: 0 auto;
+    }
+
+    /* ================= NAV ================= */
+    .nav{
+      position: fixed;
+      top:0; left:0; right:0;
+      height: var(--nav-h);
+      z-index: 50;
+      display:flex;
+      align-items:center;
+      background: rgba(0,31,45,.3);
+      backdrop-filter: blur(8px);
+      border-bottom: var(--line-w) solid var(--line);
+    }
+    .nav .container{
+      display:flex;
+      gap: 22px;
+      justify-content: center;
+    }
+    .nav a{
+      font-size: 12px;
+      letter-spacing: .2em;
+      opacity: .9;
+      padding: 10px 2px;
+      text-transform: uppercase;
+    }
+    .nav a:hover{ opacity: 1; }
+
+    /* ================= HERO STRIP ================= */
+    .page-hero{
+      margin-top: var(--nav-h);
+      border-top: var(--line-w) solid var(--line);
+      border-bottom: var(--line-w) solid var(--line);
+      height: 110px;
+      position: relative;
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .page-hero::before{
+      content:"";
+      position:absolute; inset:0;
+      background: url("./assets/contact-hero.png") center/cover no-repeat;
+      opacity: .95;
+    }
+    .page-hero h1{
+      position: relative;
+      z-index: 1;
+      font-family: "BuenardLocal", serif;
+      font-weight: 300;
+      font-size: 44px;
+      letter-spacing: .12em;
+      margin: 0;
+      text-shadow: 0 1px 18px rgba(0,0,0,.35);
+    }
+
+    /* ================= MAIN ================= */
+    main{
+      padding: 56px 0 78px;
+      border-bottom: var(--line-w) solid var(--line);
+    }
+
+    .form-wrap{
+      width: min(720px, 100%);
+      margin: 0 auto;
+      padding: 8px 0 12px;
+    }
+
+    .field{
+      margin: 0 0 34px;
+    }
+    label{
+      display:block;
+      font-family:
+        "Hiragino Mincho ProN",
+        "Yu Mincho",
+        "Noto Serif JP",
+        serif;
+      letter-spacing: .08em;
+      font-size: 14px;
+      color: var(--cream);
+      margin: 0 0 10px;
+    }
+
+    input, textarea{
+      width: 100%;
+      border: none;
+      outline: none;
+      background: var(--cream);
+      color: var(--navy);
+      padding: 12px 14px;
+      font-size: 14px;
+      letter-spacing: .03em;
+      box-shadow: none;
+      border-radius: 0;
+    }
+
+    textarea{
+      min-height: 190px;
+      resize: vertical;
+      padding: 14px;
+    }
+
+    .actions{
+      display:flex;
+      justify-content: center;
+      margin-top: 6px;
+    }
+
+    .submit{
+      width: 220px;
+      height: 48px;
+      border-radius: 999px;
+      border: var(--line-w) solid var(--line);
+      background: transparent;
+      color: var(--cream);
+      cursor: pointer;
+      letter-spacing: .18em;
+      font-size: 12px;
+      text-transform: uppercase;
+      transition: transform .15s ease, background .15s ease, color .15s ease;
+    }
+    .submit:hover{
+      transform: translateY(-2px);
+      background: var(--cream);
+      color: var(--navy);
+    }
+    .submit:disabled{
+      opacity: .55;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .status{
+      margin-top: 18px;
+      text-align:center;
+      font-size: 12px;
+      letter-spacing: .12em;
+      color: var(--cream-dim);
+      min-height: 1.2em;
+    }
+
+    /* ================= FOOTER ================= */
+    footer{ padding: 26px 0; }
+    .footer-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      align-items:center;
+    }
+    .footer-logo img{ height:22px; }
+    .footer-nav{
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      font-size:11px;
+      letter-spacing:.2em;
+      text-transform: uppercase;
+    }
+    .footer-social{
+      display:flex;
+      justify-content:flex-end;
+      gap:14px;
+    }
+    .social-link{
+      width:22px;
+      height:22px;
+      opacity:.9;
+    }
+    .social-link img{ width:100%; height:100%; }
+
+    @media(max-width:980px){
+      .container{ width: calc(100% - 40px); }
+      .page-hero h1{ font-size: 38px; }
+      .form-wrap{ width: min(640px, 100%); }
+    }
+    @media(max-width:600px){
+      .container{ width: calc(100% - 28px); }
+      .submit{ width: 200px; }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="nav">
+    <div class="container">
+      <a href="./index.html#home">HOME</a>
+      <a href="./profile.html">PROFILE</a>
+      <a href="./work.html">WORK</a>
+      <a href="./writing.html">WRITING</a>
+      <a href="./contact.html">CONTACT</a>
+    </div>
+  </nav>
+
+  <header class="page-hero">
+    <h1>Contact</h1>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="form-wrap">
+        <!-- Formspree: action を自分のエンドポイントに差し替え -->
+       <form action="https://formspree.io/f/xykwjpgy" method="POST">
+
+          <div class="field">
+            <label for="name">お名前 / Name*</label>
+            <input id="name" name="name" type="text" required autocomplete="name" />
+          </div>
+
+          <div class="field">
+            <label for="email">メールアドレス / Email address*</label>
+            <input id="email" name="email" type="email" required autocomplete="email" />
+          </div>
+
+          <div class="field">
+            <label for="subject">件名 / Subject*</label>
+            <input id="subject" name="subject" type="text" required />
+          </div>
+
+          <div class="field">
+            <label for="message">内容 / Message*</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+
+          <div class="actions">
+            <button class="submit" id="submitBtn" type="submit">SEND</button>
+          </div>
+
+          <div class="status" id="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-logo">
+        <img src="./assets/logo.png" alt="">
+      </div>
+      <div class="footer-nav">
+        <a href="./index.html#home">HOME</a>
+        <a href="./profile.html">PROFILE</a>
+        <a href="./work.html">WORK</a>
+        <a href="./writing.html">WRITING</a>
+        <a href="./contact.html">CONTACT</a>
+      </div>
+      <div class="footer-social">
+        <a class="social-link" href="#" aria-label="Instagram"><img src="./assets/instagram.svg" alt=""></a>
+        <a class="social-link" href="#" aria-label="X"><img src="./assets/x.svg" alt=""></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ====== Formspree を fetch で送る（成功/失敗メッセージ表示）======
+    const form = document.getElementById("contactForm");
+    const statusEl = document.getElementById("status");
+    const btn = document.getElementById("submitBtn");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      statusEl.textContent = "";
+      btn.disabled = true;
+
+      try{
+        const fd = new FormData(form);
+        const res = await fetch(form.action, {
+          method: "POST",
+          body: fd,
+          headers: { "Accept": "application/json" }
+        });
+
+        if(res.ok){
+          form.reset();
+          statusEl.textContent = "送信しました / Sent.";
+        }else{
+          statusEl.textContent = "送信に失敗しました / Failed.";
+        }
+      }catch(err){
+        statusEl.textContent = "送信に失敗しました / Failed.";
+      }finally{
+        btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

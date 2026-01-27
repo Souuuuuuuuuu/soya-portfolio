@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Work | Soya Yasuda Portfolio</title>
+
+  <style>
+    @font-face{
+      font-family: "BuenardLocal";
+      src: url("./assets/Buenard-VariableFont_wght.ttf") format("truetype");
+      font-display: swap;
+    }
+
+    :root{
+      --navy: #001F2D;
+      --cream:#FFFCED;
+      --cream-dim: rgba(255,252,237,.82);
+      --line: #FFFCED;
+      --line-w: 0.5px;
+      --max: 1100px;
+      --nav-h: 64px;
+
+      /* ===== 追加（左右余白の差を無くすための制御） ===== */
+      --edge-pad: 120px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      background: var(--navy);
+      color: var(--cream);
+      letter-spacing: .02em;
+      font-family: system-ui, -apple-system, "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+    }
+    a{ color:inherit; text-decoration:none; }
+    img{ display:block; max-width:100%; }
+
+    .container{
+      width: min(var(--max), calc(100% - 80px));
+      margin: 0 auto;
+    }
+
+    /* ================= NAV ================= */
+    .nav{
+      position: fixed;
+      top:0; left:0; right:0;
+      height: var(--nav-h);
+      z-index: 50;
+      display:flex;
+      align-items:center;
+      background: rgba(0,31,45,.3);
+      backdrop-filter: blur(8px);
+      border-bottom: var(--line-w) solid var(--line);
+    }
+    .nav .container{
+      display:flex;
+      gap: 22px;
+      justify-content: center;
+    }
+    .nav a{
+      font-size: 12px;
+      letter-spacing: .2em;
+      opacity: .9;
+      padding: 10px 2px;
+      text-transform: uppercase;
+    }
+    .nav a:hover{ opacity: 1; }
+
+    /* ================= HERO STRIP ================= */
+    .page-hero{
+      margin-top: var(--nav-h);
+      border-top: var(--line-w) solid var(--line);
+      border-bottom: var(--line-w) solid var(--line);
+      height: 110px;
+      position: relative;
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .page-hero::before{
+      content:"";
+      position:absolute; inset:0;
+      background: url("./assets/work-hero.png") center/cover no-repeat;
+      opacity: .95;
+    }
+    .page-hero h1{
+      position: relative;
+      z-index: 1;
+      font-family: "BuenardLocal", serif;
+      font-weight: 300;
+      font-size: 44px;
+      letter-spacing: .12em;
+      margin: 0;
+      text-shadow: 0 1px 18px rgba(0,0,0,.35);
+    }
+
+    /* ================= MAIN ================= */
+    main{
+      padding: 44px 0 78px;
+      border-bottom: var(--line-w) solid var(--line);
+    }
+
+    .work-stage{
+      position: relative;
+      padding: 10px 0 56px;
+    }
+
+    .carousel{
+      overflow-x: auto;
+      overflow-y: visible;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 26px 8px 36px;
+      scrollbar-width: none;
+    }
+    .carousel::-webkit-scrollbar{
+      display: none;
+    }
+
+    .track{
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: 300px;
+      gap: 140px;
+      justify-content: start;
+      width: max-content;
+
+      /* ===== 修正（左右余白を完全に対称にする） ===== */
+      padding-left: var(--edge-pad);
+      padding-right: var(--edge-pad);
+      /* 以前の padding: 0 120px; を置き換え */
+    }
+
+    .card{
+      scroll-snap-align: center;
+      cursor: pointer;
+      user-select: none;
+      text-align: center;
+    }
+
+    .thumb{
+      width: 300px;
+      height: 340px;
+      display: grid;
+      place-items: center;
+    }
+    .thumb img{
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 25px rgba(0,0,0,.35));
+    }
+
+    .label{
+      margin-top: 18px;
+      font-family: "BuenardLocal", serif;
+      font-weight: 300;
+      letter-spacing: .14em;
+      font-size: 22px;
+      text-transform: uppercase;
+    }
+
+    .next-btn{
+      position: absolute;
+      right: 18px;
+      bottom: 14px;
+      width: 62px;
+      height: 62px;
+      border-radius: 999px;
+      border: var(--line-w) solid var(--line);
+      background: transparent;
+      color: var(--cream);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: transform .15s ease, background .15s ease, color .15s ease;
+    }
+    .next-btn:hover{
+      transform: translateY(-2px);
+      background: var(--cream);
+      color: var(--navy);
+    }
+    .next-btn svg{
+      width: 22px;
+      height: 22px;
+    }
+
+    /* ================= MODAL ================= */
+    .modal{
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      padding: 24px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+    }
+    .modal.is-open{ display: flex; }
+
+    .modal-backdrop{
+      position:absolute; inset:0;
+      background: rgba(0,0,0,.58);
+      backdrop-filter: blur(6px);
+    }
+
+    .modal-panel{
+      position: relative;
+      width: min(980px, calc(100% - 60px));
+      margin: 80px auto;
+      border: var(--line-w) solid var(--line);
+      background: rgba(0,31,45,.92);
+      box-shadow: 0 18px 60px rgba(0,0,0,.55);
+      padding: 26px;
+
+
+  max-height: calc(100vh - 48px);      /* modal padding(24*2)分を引く */
+  overflow: hidden;                    /* パネル自体ははみ出させない */
+
+  /* 調整：余白を少しだけ詰める（見切れやすいので） */
+  padding: 18px;
+    }
+
+    .modal-head{
+      display:flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      padding-bottom: 14px;
+      border-bottom: var(--line-w) solid rgba(255,252,237,.45);
+    }
+
+    .modal-title{
+      font-family: "BuenardLocal", serif;
+      font-weight: 300;
+      letter-spacing: .12em;
+      margin: 0;
+      font-size: 28px;
+      text-transform: uppercase;
+    }
+
+    .modal-close{
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: var(--line-w) solid var(--line);
+      background: transparent;
+      color: var(--cream);
+      cursor: pointer;
+      display:grid;
+      place-items:center;
+      transition: .15s;
+    }
+    .modal-close:hover{
+      background: var(--cream);
+      color: var(--navy);
+    }
+
+    .modal-body{
+      display:grid;
+      grid-template-columns: 1fr 320px;
+      gap: 24px;
+      padding-top: 18px;
+      align-items: start;
+      min-height: 0;
+  height: calc(100% - 64px); /* ヘッダー分を引く（だいたいでOK） */
+    }
+
+    .modal-image{
+      border: var(--line-w) solid rgba(255,252,237,.35);
+      padding: 14px;
+      background: rgba(0,0,0,.12);
+      min-height: 0;
+  height: 100%;
+  display: grid;
+  place-items: center;
+    }
+    .modal-image img{
+      width:100%;
+      height:auto;
+      object-fit: contain;
+      max-height: calc(100vh - 160px);
+    }
+
+    .modal-meta{
+      font-family:
+        "Hiragino Mincho ProN",
+        "Yu Mincho",
+        "Noto Serif JP",
+        serif;
+      color: var(--cream-dim);
+      font-size: 13px;
+      line-height: 2.0;
+      letter-spacing: .08em;
+      min-height: 0;
+  overflow: auto; 
+    }
+    .modal-meta b{
+      color: var(--cream);
+      font-weight: 600;
+    }
+
+    /* ================= FOOTER ================= */
+    footer{
+      padding: 26px 0;
+    }
+    .footer-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      align-items:center;
+    }
+    .footer-logo img{ height:22px; }
+    .footer-nav{
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      font-size:11px;
+      letter-spacing:.2em;
+      text-transform: uppercase;
+    }
+    .footer-social{
+      display:flex;
+      justify-content:flex-end;
+      gap:14px;
+    }
+    .social-link{
+      width:22px;
+      height:22px;
+      opacity:.9;
+    }
+    .social-link img{ width:100%; height:100%; }
+
+    @media(max-width:980px){
+      .container{ width: calc(100% - 40px); }
+      .track{ gap: 80px; grid-auto-columns: 280px; }
+      .thumb{ width: 280px; height: 320px; }
+      .label{ font-size: 20px; }
+      .page-hero h1{ font-size: 38px; }
+      .modal-body{ grid-template-columns: 1fr; }
+
+      /* ===== 追加（縮尺に合わせて左右余白も追従） ===== */
+      :root{ --edge-pad: 60px; }
+    }
+    @media(max-width:600px){
+      .container{ width: calc(100% - 28px); }
+      .track{ gap: 40px; grid-auto-columns: 240px; }
+      .thumb{ width: 240px; height: 290px; }
+      .next-btn{ right: 14px; bottom: 12px; width: 56px; height: 56px; }
+
+      /* ===== 追加（さらに追従） ===== */
+      :root{ --edge-pad: 28px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<nav class="nav">
+  <div class="container">
+    <a href="./index.html">HOME</a>
+    <a href="./profile.html">PROFILE</a>
+    <a href="./work.html">WORK</a>
+    <a href="./writing.html">WRITING</a>
+    <a href="./contact.html">CONTACT</a>
+  </div>
+</nav>
+
+
+<header class="page-hero">
+  <h1>Work</h1>
+</header>
+
+<main>
+  <div class="container">
+    <div class="work-stage">
+      <div class="carousel" id="carousel" aria-label="Work carousel">
+        <div class="track" id="track">
+          <div class="card" data-index="0">
+            <div class="thumb"><img src="./assets/work1.png" alt="work 1"></div>
+          
+          </div>
+
+          <div class="card" data-index="1">
+            <div class="thumb"><img src="./assets/work2.png" alt="work 2"></div>
+         
+          </div>
+
+          <div class="card" data-index="2">
+            <div class="thumb"><img src="./assets/work3.png" alt="work 3"></div>
+            
+          </div>
+
+          <div class="card" data-index="3">
+            <div class="thumb"><img src="./assets/work4.png" alt="work 4"></div>
+    
+          </div>
+
+          <div class="card" data-index="4">
+            <div class="thumb"><img src="./assets/work5.png" alt="work 5"></div>
+         
+          </div>
+        </div>
+      </div>
+
+      <button class="next-btn" id="nextBtn" aria-label="Next work">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container footer-grid">
+    <div class="footer-logo">
+      <img src="./assets/logo.png" alt="">
+    </div>
+    <div class="footer-nav">
+      <a href="./index.html#home">HOME</a>
+      <a href="./profile.html">PROFILE</a>
+      <a href="./work.html">WORK</a>
+      <a href="./writing.html#writing">WRITING</a>
+      <a href="./contact.html">CONTACT</a>
+    </div>
+    <div class="footer-social">
+      <a class="social-link" href="#" aria-label="Instagram"><img src="./assets/instagram.svg" alt=""></a>
+      <a class="social-link" href="#" aria-label="X"><img src="./assets/x.svg" alt=""></a>
+    </div>
+  </div>
+</footer>
+
+<div class="modal" id="modal" aria-hidden="true">
+  <div class="modal-backdrop" id="modalBackdrop"></div>
+  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-head">
+      <h2 class="modal-title" id="modalTitle">WORK</h2>
+      <button class="modal-close" id="modalClose" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" width="18" height="18">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-image">
+        <img id="modalImg" src="" alt="">
+      </div>
+      <div class="modal-meta" id="modalMeta"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const works = [
+    { title: "90's Revival", img: "./assets/work1.png", date: "2025/11/22", desc: "90年代の服って魅力的だよね" },
+    { title: "ADDICTION",    img: "./assets/work2.png", date: "2025/07/21", desc: "You don't trust me." },
+    { title: "Drama",     img: "./assets/work3.png", date: "2025/010/21",          desc: "夢見心地" },
+    { title: "NOTICE",    img: "./assets/work4.png", date: "2025/04/21",          desc: "気づかなくていいよ" },
+    { title: "9090",    img: "./assets/work5.png", date: "2025/05/21",          desc: "23A/W" },
+  ];
+
+  const carousel = document.getElementById("carousel");
+  const cards = Array.from(document.querySelectorAll(".card"));
+  const nextBtn = document.getElementById("nextBtn");
+
+  function getClosestCardIndex(){
+    const centerX = carousel.scrollLeft + carousel.clientWidth / 2;
+
+    let bestIdx = 0;
+    let bestDist = Infinity;
+
+    cards.forEach((card, i) => {
+      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+      const d = Math.abs(cardCenter - centerX);
+      if (d < bestDist) {
+        bestDist = d;
+        bestIdx = i;
+      }
+    });
+
+    return bestIdx;
+  }
+
+  function scrollToCard(idx){
+    const card = cards[idx];
+    if(!card) return;
+
+    const targetLeft =
+      card.offsetLeft - (carousel.clientWidth / 2) + (card.offsetWidth / 2);
+
+    carousel.scrollTo({ left: targetLeft, behavior: "smooth" });
+  }
+
+  nextBtn.addEventListener("click", () => {
+    const current = getClosestCardIndex();
+    const next = (current + 1) % cards.length;
+    scrollToCard(next);
+  });
+
+  carousel.addEventListener("wheel", (e) => {
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      carousel.scrollLeft += e.deltaY;
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  const modal = document.getElementById("modal");
+  const modalBackdrop = document.getElementById("modalBackdrop");
+  const modalClose = document.getElementById("modalClose");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalImg = document.getElementById("modalImg");
+  const modalMeta = document.getElementById("modalMeta");
+
+  function openModal(index){
+    const w = works[index];
+    modalTitle.textContent = w.title;
+    modalImg.src = w.img;
+    modalImg.alt = w.title;
+
+    const dateLine = w.date ? `<div><b>Date</b>：${w.date}</div>` : "";
+    modalMeta.innerHTML = `
+      ${dateLine}
+      <div style="margin-top:10px;"><b>Description</b></div>
+      <div>${w.desc}</div>
+    `;
+
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal(){
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  cards.forEach((card) => {
+    card.addEventListener("click", () => {
+      const idx = Number(card.dataset.index);
+      openModal(idx);
+    });
+  });
+
+  modalBackdrop.addEventListener("click", closeModal);
+  modalClose.addEventListener("click", closeModal);
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal();
+  });
+</script>
+
+</body>
+</html>

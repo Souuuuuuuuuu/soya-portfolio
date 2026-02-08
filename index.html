@@ -236,33 +236,49 @@
       justify-content:flex-end;
     }
 
-    /* ================= WRITING ================= */
-    .writing-row{
-      display:flex;
-      justify-content:center;
-      gap:22px;
-      flex-wrap:wrap;
-    }
-    .tag-vertical{
-      width:46px;
-      height:150px;
-      border:1px solid #FFFCED;
-      writing-mode: vertical-rl;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-family:
-        "Hiragino Mincho ProN",
-        "Yu Mincho",
-        "Noto Serif JP",
-        serif;
-      font-size:12px;
-    }
-    .writing-actions{
-      margin-top:50px;
-      display:flex;
-      justify-content:flex-end;
-    }
+  /* ================= PROJECT ================= */
+.project-grid{
+  display:grid;
+  grid-template-columns: repeat(3,1fr);
+  gap:36px;
+}
+
+.project-card{
+  border:1px solid #FFFCED;
+  padding:20px;
+  transition:.2s;
+}
+
+.project-card img{
+  margin-bottom:16px;
+}
+
+.project-card h3{
+  font-family:"BuenardLocal", serif;
+  font-size:18px;
+  margin-bottom:10px;
+  letter-spacing:.08em;
+}
+
+.project-card p{
+  font-family:
+    "Hiragino Mincho ProN",
+    "Yu Mincho",
+    serif;
+  font-size:12px;
+  line-height:1.8;
+  color: var(--cream-dim);
+}
+
+.project-card:hover{
+  transform: translateY(-4px);
+}
+
+.project-actions{
+  margin-top:40px;
+  display:flex;
+  justify-content:flex-end;
+}
 
     /* ================= CONTACT ================= */
     .contact{
@@ -329,7 +345,7 @@
     <a href="./index.html">HOME</a>
     <a href="./profile.html">PROFILE</a>
     <a href="./work.html">WORK</a>
-    <a href="./writing.html">WRITING</a>
+    <a href="./projects.html">PROJECTS</a>
     <a href="./contact.html">CONTACT</a>
   </div>
 </nav>
@@ -380,24 +396,55 @@
   </div>
 </section>
 
-<section id="writing">
+<section id="projects">
   <div class="container">
-    <h2 class="section-title">Writing</h2>
-    <div class="writing-row">
-      <div class="tag-vertical">冬</div>
-      <div class="tag-vertical">秋</div>
-      <div class="tag-vertical">シャッターを切る事</div>
-      <div class="tag-vertical">夏</div>
-      <div class="tag-vertical">言葉</div>
-      <div class="tag-vertical">朝焼け</div>
-      <div class="tag-vertical">常夢</div>
-      <div class="tag-vertical">春</div>
-    </div>
-    <div class="writing-actions">
-      <a class="btn-outline" href="./writing.html">View more..</a>
+    <h2 class="section-title">Projects</h2>
+
+    <div class="project-grid">
+      <div class="project-card">
+        <img src="/assets/project1.jpg">
+       <h3>小松島海岸アートプロジェクト</h3>
+    <p>
+      地域活性化を目的としたアートプロジェクトに参加。
+      参加者と協働しながら作品制作・展示を行い、
+      海岸という公共空間を活かした表現を通して、
+      地域と人をつなぐ場づくりに取り組んだ。
+    </p>
+  </div>
+
+      <div class="project-card">
+        <img src="/assets/project3.png">
+         <h3>FRC Team Hanabi</h3>
+    <p>
+      日本唯一の学校公認FRCチーム「Hanabi」にて
+      営業・プロダクトデザインを担当。
+      31社の企業協賛とクラウドファンディングにより
+      総額2,200万円を調達。
+      自身がデザインした案がピンバッジとして採用・商品化された。
+    </p>
+  </div>
+
+      <div class="project-card">
+        <img src="/assets/project5.png">
+         <h3>2025 まるごと祭 実行委員</h3>
+    <p>
+      集客来場管理リーダーを担当。
+      集客戦略の設計、徳島アンテナショップとの連携、
+      SNS運用を実施。
+      人口約5,000人の神山町に
+      2,500人の来場者を呼び込むことに成功。
+    </p>
+  </div>
+
+  </div>
+
+
+    <div class="project-actions">
+      <a class="btn-outline" href="./projects.html">View more..</a>
     </div>
   </div>
 </section>
+
 
 <section class="contact" id="contact">
   <div class="container">
